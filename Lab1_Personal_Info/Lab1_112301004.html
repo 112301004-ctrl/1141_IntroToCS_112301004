@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Today's Lab</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Today’s Lab</h1>
+    <form id="personalForm">
+    <table border="1" width="600" align="center" cellpadding="8">
+    <tr>
+        <th colspan="3" align="center">About 黃千鏵</th>
+    </tr>
+    <tr>
+        <td rowspan="3" align="center" valign="top">
+            <img src="myphoto.jpg" width="100"><br>
+            personal photo
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" valign="top">
+            Name: <input type="text"><br>
+            Gender:
+            <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female
+            <input type="radio" name="gender"> Other
+        </td>
+    </tr>
+    <tr>
+        <td>
+            County:
+            <select>
+                <option selected>Taipei</option>
+                <option>Tainan</option>
+                <option>Taichung</option>
+                <option>Taoyuan</option>
+            </select>
+        </td>
+        <td>
+        Birthday: <input type="date">
+        </td>
+    </tr>
+
+    <tr>
+        <td valign="top">Email</td>
+        <td colspan="2" valign="top">
+            E-mail: <input type="email" value=" ">
+        </td>
+    </tr>
+
+    <tr>
+        <td valign="top">Hobby</td>
+        <td colspan="2" valign="top">
+            <input type="checkbox"> Swimming
+            <input type="checkbox"> Volleyball
+            <input type="checkbox"> Movie
+            <input type="checkbox"> Game
+            <input type="checkbox"> Sleep
+        </td>
+    </tr>
+
+    <tr>
+        <td valign="top">Skill</td>
+        <td colspan="2" valign="top">
+            <input type="checkbox"> Java
+            <input type="checkbox"> HTML
+            <input type="checkbox"> Python
+            <input type="checkbox"> MS Office
+            <input type="checkbox"> Premiere
+        </td>
+    </tr>
+
+    <tr>
+        <td valign="top">Say Something</td>
+        <td colspan="2" valign="top">
+            <input type="text" placeholder="Say something">
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+            <input type="submit" value="提交">
+            <input type="button" value="重設" onclick="customReset()">
+        </td>
+    </tr>
+    </table>
+    </form>
+    <script>
+    function customReset() {
+    const form = document.getElementById('personalForm');
+
+    // 恢復文字欄位預設值
+    form.querySelectorAll('input[type="text"]').forEach(input => input.value = input.defaultValue);
+
+    // 取消性別選擇
+    form.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = radio.defaultChecked);
+
+    // 取消多選框
+    form.querySelectorAll('input[type="checkbox"]').forEach(box => box.checked = false);
+    // 取消email
+    form.querySelectorAll('input[type="text"], input[type="email"]').forEach(input => input.value = input.defaultValue);
+
+    // 恢復下拉選單預設
+    const select = form.querySelector('select');
+    if(select) select.selectedIndex = 0;
+
+    // 恢復日期欄位預設
+    const dateInput = form.querySelector('input[type="date"]');
+    if(dateInput) dateInput.value = dateInput.defaultValue;
+    }
+    </script>
+</body>
+</html>
