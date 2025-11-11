@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>112301004_Portfolio</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            text-align: left;
+            width: 700px; /* 整體寬度 */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 6px 10px;
+            vertical-align: middle;
+        }
+        th {
+            text-align: center;
+            background-color: #c0d6e4;
+        }
+        .photo img {
+            width: 180px;
+            display: block;
+            margin: 5px auto;
+        }
+        h1 {
+            margin: 8px 0;
+            font-size: 20px;
+        }
+        ul {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <!-- 設定各欄寬度 -->
+    <colgroup>
+        <col style="width: 180px;"> <!-- 照片欄固定 -->
+        <col style="width: 150px;"> <!-- 標籤欄 -->
+        <col style="width: auto;">  <!-- 內容欄 -->
+    </colgroup>
+
+    <!-- 第一列：作品集標題 -->
+    <tr class="title-row">
+        <th colspan="3">
+            <h1>歡迎來到千鏵的個人作品集</h1>
+        </th>
+    </tr>
+
+    <!-- 個人基本資料 -->
+    <tr>
+        <td rowspan="4" class="photo">
+            <img src="my.jpg" alt="個人照片">
+        </td>
+        <td>姓名</td>
+        <td>黃千鏵</td>
+    </tr>
+    <tr>
+        <td>學校</td>
+        <td>政治大學</td>
+    </tr>
+    <tr>
+        <td>科系</td>
+        <td>國際經營與貿易學系</td>
+    </tr>
+    <tr>
+        <td>年級</td>
+        <td>大三</td>
+    </tr>
+
+    <!-- 學習經歷 -->
+    <tr><th colspan="3">學習經歷</th></tr>
+    <tr>
+        <td>程式語言</td>
+        <td colspan="2">
+            <ul>
+                <li>Python 基礎</li>
+                <li>HTML 入門</li>
+                <li>C++ 基礎</li>
+                <li>Java 基礎</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>修課記錄</td>
+        <td colspan="2">
+            <ul>
+                <li>計算機概論</li>
+                <li>程式設計入門</li>
+            </ul>
+        </td>
+    </tr>
+
+    <!-- 作品集 -->
+    <tr><th colspan="3">作品集</th></tr>
+    <tr>
+        <td>作業與報告清單</td>
+        <td colspan="2">
+            <ul>
+                <li><a href="https://github.com/112301004-ctrl/1141_IntroToCS_112301004/tree/main/HW1_Github">作業1</a></li>
+                <li><a href="https://github.com/112301004-ctrl/HW2/blob/main/%E8%A8%88%E6%A6%82hw2.pdf">作業2</a></li>
+                <li><a href="https://github.com/112301004-ctrl/1141_IntroToCS_112301004/tree/main/HW3_Excel1">作業3</a></li>
+            </ul>
+        </td>
+    </tr>
+
+    <!-- 最愛音樂 -->
+    <tr><th colspan="3">我的最愛音樂</th></tr>
+    <tr>
+         <td colspan="3" class="music">
+            <div class="music-item">
+                <a href="https://www.youtube.com/watch?v=QsO__PU2L9Y&list=RDQsO__PU2L9Y&start_radio=1">
+                    <img src="Youtube.png" width="50" alt="Youtube">
+                </a>
+                <p>陳華 - 想和你看五月的晚霞：夏日續章</p>
+            </div>
+            <div class="music-item">
+                <a href="https://www.youtube.com/watch?v=XiuGtt1bbQM&list=RDXiuGtt1bbQM&start_radio=1">
+                     <img src="Youtube.png" width="50" alt="Youtube">
+                </a>
+                <p>Anne-Marie - Depressed</p>
+            </div>
+            <div class="music-item">
+                <a href="https://www.youtube.com/watch?v=rXCjRinQEpM&list=RDrXCjRinQEpM&start_radio=1">
+                     <img src="Youtube.png" width="50" alt="Youtube">
+                </a>
+                <p>婁峻碩 - 不小心</p>
+            </div>
+        </td>
+    </tr>
+
+    <!-- 聯絡方式 -->
+    <tr><th colspan="3">聯絡方式</th></tr>
+    <tr>
+        <td>Email</td>
+        <td colspan="2">
+            聯絡我:
+            <a href="mailto:112301004@g.nccu.edu.tw">112301004@g.nccu.edu.tw</a><br>
+            <img src="政大logo.png" width="200" alt="政大logo">
+        </td>
+    </tr>
+</table>
+</body>
+</html>
