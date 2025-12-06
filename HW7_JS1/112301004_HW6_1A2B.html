@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1A2B Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        /* 題目要求：頂部標題 */
+        h1 {
+            color: #333;
+            background-color: #fff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        .instructions {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* 輸入框與按鈕樣式 */
+        .input-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            width: 120px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 歷史紀錄區域 */
+        #history-area {
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        .history-item {
+            font-size: 16px;
+            padding: 8px 10px;
+            border-bottom: 1px solid #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guess-number {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 1A2B 結果標籤樣式 */
+        .badge {
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .badge-normal {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .badge-win {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- !!! IMPORTANT: 請將 StudentID 改成你的學號 !!! -->
+    <h1>StudentID_HW6_1A2B</h1>
+
+    <div class="game-container">
+        <p class="instructions">請輸入 4 個不重複的數字 (0-9)</p>
+        
+        <!-- 輸入區塊 -->
+        <div class="input-group">
+            <input type="text" id="guessInput" placeholder="1234" maxlength="4">
+            <button onclick="play()">猜!</button>
+        </div>
+
+        <!-- 歷史紀錄顯示區 -->
+        <div id="history-area">
+            <!-- 這裡會動態插入猜測結果 -->
+        </div>
+    </div>
+
+    <script>
+        // 全域變數
+        var secretAnswer = ""; // 儲存正確答案
+        var attempts = 0;      // 計算猜測次數
+
+        // 當網頁載入完成時，生成答案
+        window.onload = function() {
+            secretAnswer = generateAnswer();
+            // 測試用：在 Console 偷看答案 (開發者工具 -> Console)
+            console.log("偷看答案: " + secretAnswer);
+        };
+
+        /**
+         * 產生遊戲答案
+         * 隨機選出 4 個不重複的數字 (0~9)
+         */
+        function generateAnswer() {
+            // 1. 建立數字池 0-9
+            var pool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var result = "";
+
+            // 重複 4 次
+            for (var i = 0; i < 4; i++) {
+                // 2. 隨機選一個索引
+                var randomIndex = Math.floor(Math.random() * pool.length);
+                
+                // 3. 將選到的數字加到結果字串
+                result += pool[randomIndex];
+                
+                // 4. 從池中移除該數字，避免重複
+                pool.splice(randomIndex, 1);
+            }
+            
+            return result;
+        }
+
+        /**
+         * 驗證使用者輸入
+         * 規則：必須是 4 位數、必須是數字、不能有重複數字
+         */
+        function isValid(str) {
+            // 檢查 1: 長度必須是 4
+            if (str.length !== 4) {
+                return false;
+            }
+
+            // 檢查 2: 必須是數字 (isNaN = is Not a Number)
+            if (isNaN(str)) {
+                return false;
+            }
+
+            // 檢查 3: 數字不能重複
+            // 使用 Set 物件來過濾重複值，如果 Set 的大小不是 4，代表有重複
+            var uniqueSet = new Set(str);
+            if (uniqueSet.size !== 4) {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * 計算 ?A?B
+         * A: 數字對且位置對
+         * B: 數字對但位置錯
+         */
+        function checkAB(guess, ans) {
+            var countA = 0;
+            var countB = 0;
+
+            for (var i = 0; i < 4; i++) {
+                // 檢查 A
+                if (guess[i] === ans[i]) {
+                    countA++;
+                } 
+                // 檢查 B (如果不完全符合，但答案字串中包含這個數字)
+                else if (ans.includes(guess[i])) {
+                    countB++;
+                }
+            }
+
+            return countA + "A" + countB + "B";
+        }
+
+        /**
+         * 主遊戲流程 (按下按鈕時觸發)
+         */
+        function play() {
+            var inputField = document.getElementById("guessInput");
+            var userGuess = inputField.value;
+
+            // 1. 驗證輸入
+            if (!isValid(userGuess)) {
+                alert("輸入錯誤！請輸入 4 個「不重複」的數字。");
+                inputField.value = ""; // 清空輸入框
+                return; // 結束函式，不往下執行
+            }
+
+            // 2. 次數 +1
+            attempts++;
+
+            // 3. 計算結果
+            var resultAB = checkAB(userGuess, secretAnswer);
+
+            // 4. 將結果顯示在歷史紀錄區 (插入在最上方)
+            var historyArea = document.getElementById("history-area");
+            var newItem = document.createElement("div");
+            newItem.className = "history-item";
+            
+            // 根據是否獲勝改變樣式
+            var badgeClass = (resultAB === "4A0B") ? "badge badge-win" : "badge badge-normal";
+
+            // 設定 HTML 內容
+            newItem.innerHTML = `
+                <span class="guess-number">第 ${attempts} 次: ${userGuess}</span>
+                <span class="${badgeClass}">${resultAB}</span>
+            `;
+            
+            // insertBefore 將新元素放在第一個子元素之前
+            historyArea.insertBefore(newItem, historyArea.firstChild);
+
+            // 5. 判斷獲勝條件
+            if (resultAB === "4A0B") {
+                // 給一點延遲讓畫面先更新出 4A0B 再跳視窗
+                setTimeout(function() {
+                    alert("恭喜你猜對了！\n總共嘗試次數: " + attempts);
+                }, 100);
+            }
+
+            // 6. 清空輸入框並讓游標回到輸入框
+            inputField.value = "";
+            inputField.focus();
+        }
+    </script>
+</body>
+</html>
