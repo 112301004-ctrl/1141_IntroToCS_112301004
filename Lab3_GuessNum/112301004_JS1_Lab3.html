@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #result-container {
+            margin-top: 20px;
+            min-height: 300px; /* Reserve space for the image */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. The HTML content must begin with an <h1> element -->
+    <!-- Please replace 'StudentID' with your actual ID -->
+    <h1 id="game-title">112301004_Number Guessing Game</h1>
+
+    <!-- 2. Create an empty <div> -->
+    <div id="result-container"></div>
+
+    <script>
+        // Game Initialization
+        // Tip: Math.random()：0~1 -> 1 to 100
+        var answer = Math.floor(Math.random() * 100) + 1;
+        var chances = 7;
+        var minRange = 1;
+        var maxRange = 100;
+        var isWin = false;
+        
+        // Get the empty div
+        var resultDiv = document.getElementById("result-container");
+
+        // Tip: while (chances > 0)
+        // Game Loop
+        while (chances > 0) {
+            // Tip: Use window.prompt()
+            // Each prompt must inform the user of valid range and remaining attempts
+            var input = window.prompt(
+                "Valid Range: " + minRange + " ~ " + maxRange + "\n" +
+                "Attempts remaining: " + chances + "\n" +
+                "Please enter your guess:"
+            );
+
+            // Handle Cancel button (optional but prevents errors)
+            if (input === null) {
+                alert("Game Cancelled.");
+                break;
+            }
+
+            // Tip: input.trim() to remove whitespace
+            var trimmedInput = input.trim();
+
+            // Tip: Check for empty or non-number
+            if (trimmedInput === "" || isNaN(trimmedInput)) {
+                alert("Invalid input! Please enter a number.");
+                continue; // Skip the rest of the loop, do not deduct a chance
+            }
+
+            // Tip: var guess = Number(input)
+            var guess = Number(trimmedInput);
+
+            // Validate Range
+            // Each input must be checked whether it falls within the valid range
+            if (guess < minRange || guess > maxRange) {
+                alert("Invalid input! Please enter a number between " + minRange + " and " + maxRange + ".");
+                continue; // Skip, do not deduct a chance
+            }
+
+            // Game Logic
+            if (guess === answer) {
+                isWin = true;
+                break; // Exit the loop on win
+            } else if (guess > answer) {
+                // Update upper bound
+                // If answer is 50 and guess is 60, max becomes 59
+                maxRange = guess - 1; 
+                chances--;
+            } else {
+                // Update lower bound
+                // If answer is 50 and guess is 40, min becomes 41
+                minRange = guess + 1;
+                chances--;
+            }
+        }
+
+        // End Game Handling
+        if (isWin) {
+            // When the guess is correct, use alert()
+            alert("Correct! You guessed the number " + answer + ".");
+            
+            // Insert correct.jpg
+            resultDiv.innerHTML = '<img src="correct.jpg" alt="Correct Answer">';
+        } else {
+            // Only show loss if chances ran out (not if user cancelled)
+            if (input !== null) {
+                // When attempts reach zero, notify the user of the correct answer
+                alert("Game Over! You have run out of attempts.\nThe correct number was: " + answer);
+                
+                // Insert wrong.jpg
+                resultDiv.innerHTML = '<img src="wrong.jpg" alt="Game Over">';
+            }
+        }
+    </script>
+</body>
+</html>
