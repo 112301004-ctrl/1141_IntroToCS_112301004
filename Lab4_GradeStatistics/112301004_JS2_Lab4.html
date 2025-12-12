@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h1>Grade Statistics</h1>
+    <div class="input-group">
+        <input type="number" id="mathGrade" placeholder="Math">
+        <input type="number" id="englishGrade" placeholder="English">
+        <button id="submitBtn">Submit</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Math</th>
+                <th>English</th>
+                <th>Average</th>
+            </tr>
+        </thead>
+        <tbody id="gradeTableBody">
+            </tbody>
+        <tfoot>
+            <tr>
+                <td>Average</td>
+                <td id="avgMath">0.00</td>
+                <td id="avgEnglish">0.00</td>
+                <td id="avgTotal">0.00</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
