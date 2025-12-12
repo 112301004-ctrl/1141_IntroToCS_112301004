@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff; /* 背景白 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+h1 {
+    font-family: "Times New Roman", serif; /* 模仿圖片的襯線字體 */
+    font-size: 3em;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+.calculator-card {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 卡片陰影 */
+    width: 300px;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* 確保 padding 不會撐大寬度 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: left;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #8B4513; /* 圖片中的棕色 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #703810; /* 滑鼠懸停變深色 */
+}
+
+.result-area {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+}
